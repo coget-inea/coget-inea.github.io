@@ -44,9 +44,9 @@
     container.innerHTML = "<div class='erro'>Parâmetros 'municipio' e 'anexo' são obrigatórios.</div>";
   } else {
     const baseUrl = window.location.origin;
-
+    console.log(baseUrl)
     const caminho = `pdfs/${sanitize(municipio)}/${sanitize(anexo)}/arquivo.pdf`;
-    console.log(baseUrl+"/"+caminho)
+    console.log(caminho)
     const iframe = document.createElement("iframe");
     iframe.src = baseUrl + "/" + encodeURI(caminho);
     //iframe.src = encodeURI(caminho)
