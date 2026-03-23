@@ -46,7 +46,7 @@
     const baseUrl = window.location.origin;
 
     const caminho = `pdfs/${sanitize(municipio)}/${sanitize(anexo)}/arquivo.pdf`;
-    console.log(caminho)
+    console.log(baseUrl+"/"+caminho)
     const iframe = document.createElement("iframe");
     iframe.src = baseUrl + "/" + encodeURI(caminho);
     //iframe.src = encodeURI(caminho)
