@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <title>Visualizar PDF</title>
+  <meta charset="UTF-8">
+  <title>Visualizador de PDF</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+    .erro {
+      padding: 20px;
+      color: red;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
 
-<iframe 
-  src="pdfs/teste - 2.pdf" 
-  width="100%" 
-  height="800px">
-</iframe>
+<div id="container"></div>
+
+<script>
+  function getParametro(nome) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(nome);
+  }
+
+  function sanitize(texto) {
+    return texto.replace(/\//g, "_");
+  }
+
+  const municipio = getParametro("municipio");
+  const anexo = getParametro("anexo");
+
+  const container = document.getElementById("container");
+
+  if (!municipio || !anexo) {
+    container.innerHTML = "<div class='erro'>Parâmetros 'municipio' e 'anexo' são obrigatórios.</div>";
+  } else {
+    const baseUrl = window.location.origin;
+
+    const caminho = `pdfs/${sanitize(municipio)}/${sanitize(anexo)}/arquivo.pdf`;
+    console.log(caminho)
+    const iframe = document.createElement("iframe");
+    iframe.src = baseUrl + "/" + encodeURI(caminho);
+    //iframe.src = encodeURI(caminho)
+    container.appendChild(iframe);
+  }
+</script>
+
 </body>
 </html>
